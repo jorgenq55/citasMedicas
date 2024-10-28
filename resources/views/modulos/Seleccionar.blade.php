@@ -41,7 +41,7 @@
                 <i class="fa fa-user-md"></i>
             </div>
 
-            <a href="Ingresar" class="small-box-footer">
+            <a href="login" class="small-box-footer">
                 Ingresar <i class="fa fa-arrow-circle-right"></i>
             </a>
 
@@ -61,7 +61,7 @@
                 <i class="fa fa-female"></i>
             </div>
 
-            <a href="Ingresar" class="small-box-footer">
+            <a href="login" class="small-box-footer">
                 Ingresar <i class="fa fa-arrow-circle-right"></i>
             </a>
 
@@ -81,7 +81,7 @@
                 <i class="fa fa-male"></i>
             </div>
 
-            <a href="Ingresar" class="small-box-footer">
+            <a href="login" class="small-box-footer">
                 Ingresar <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>

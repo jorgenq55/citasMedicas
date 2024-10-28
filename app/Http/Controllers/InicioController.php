@@ -41,10 +41,9 @@ class InicioController extends Controller
      */
     public function DatosUpdate(Request $request)
     {
-        
+        dd("sas");
         if(auth()->user()->email != request('email'))
         {
-            
             if(isset($request["passwordN"])){
                 $datos = request()->validate([
                     'name' =>['required', 'string', 'max:255'],

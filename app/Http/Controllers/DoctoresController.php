@@ -17,9 +17,7 @@ class DoctoresController extends Controller
     public function index()
     {
         if(auth()->user()->rol != "Administrador" && auth()->user()->rol != "Secretaria"){
-
             return redirect('Inicio');
-    
             }
             
             $consultorios = Consultorios::all();
@@ -45,7 +43,7 @@ class DoctoresController extends Controller
      */
     public function store(Request $request)
     {
-
+        
         $datos = request()->validate([
             'name' => ['required'],
             'id_consultorio' => ['required'],

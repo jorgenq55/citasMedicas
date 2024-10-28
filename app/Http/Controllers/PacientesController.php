@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pacientes;
 use Illuminate\Http\Request;
+use App\Models\Consultorios;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
@@ -24,8 +25,9 @@ class PacientesController extends Controller
             }
 
             $pacientes = DB::select('select * from users where rol = "Paciente"');
+            $consultorios = Consultorios::all();
 
-            return view('modulos.Pacientes')->with('pacientes', $pacientes);
+            return view('modulos.Pacientes',  compact( 'consultorios', 'pacientes'));
     }
 
     /**

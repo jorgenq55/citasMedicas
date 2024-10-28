@@ -8,7 +8,8 @@ use App\Http\Controllers\DoctoresController;
 use App\Http\Controllers\PacientesController;
 use App\Http\Controllers\CitasController;
 use App\Http\Controllers\SecretariasController;
-
+use App\Http\Livewire\AgregaConsultorio;
+use App\Http\Livewire\Paciente\CreatePaciente;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,12 +31,18 @@ Route::get('/Ingresar', function () {
 
 Auth::routes();
 
+
+
 Route::get('Inicio', [InicioController::class, 'index']);
 Route::get('Mis-Datos', [InicioController::class, 'DatosCreate']);
-Route::put('Mis-Datos', [InicioController::class, 'DatosUpdate']);
+//Route::post('Mis-Datos', 'InicioController@DatosUpdate');
+Route::post('Mis-Datos', [InicioController::class, 'DatosUpdate']);
+
 Route::get('Inicio-Editar', [InicioController::class, 'edit']);
 Route::put('Inicio-Editar', [InicioController::class, 'update']);
 
+
+Route::get('/agrega-consultorio', AgregaConsultorio::class);
 Route::post('Consultorios', [ConsultoriosController::class, 'store']);
 Route::PUT('Consultorio/{id}', [ConsultoriosController::class, 'update']);
 Route::get('Consultorios', [ConsultoriosController::class, 'index']);
@@ -71,7 +78,6 @@ Route::post('Secretarias', [SecretariasController::class, 'store']);
 Route::get('Eliminar-Secretaria/{id}', [SecretariasController::class, 'destroy']);
 Route::get('Editar-Secretaria/{id}', [SecretariasController::class, 'show']);
 Route::put('actualizar-secretaria/{id}', [SecretariasController::class, 'update']);
-
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 

@@ -36,6 +36,7 @@
   {{-- FullCalendar --}}
   <link rel="stylesheet" href="http://127.0.0.1:8000/bower_components/select2/dist/css/select2.min.css">
 
+  <link rel="stylesheet" href="{{ asset('assets/backoffice/css/app.css') }}"/>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -49,7 +50,7 @@
 <body class="hold-transition skin-blue sidebar-mini login-page">
   
 
- 
+  @livewireScripts
 
 
 @if(Auth::user())
@@ -78,7 +79,7 @@
 
 @endif
 
-
+@livewireScripts
 
 <!-- ./wrapper -->
 
@@ -129,6 +130,9 @@
 
 {{-- Select 2 --}}
 <script src="http://127.0.0.1:8000/bower_components/select2/dist/js/select2.js"></script>
+
+{{-- Jquery cambio de elementos --}}
+<script src="http://127.0.0.1:8000/assets/cambioElementos.js"></script>
 
   <script>
   $(".table").DataTable({
