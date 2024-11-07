@@ -6,6 +6,7 @@ use App\Models\Secretarias;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\Models\Consultorios;
 
 class SecretariasController extends Controller
 {
@@ -26,9 +27,10 @@ class SecretariasController extends Controller
     
             }
 
+            $consultorios = Consultorios::all();
             $secretarias = Secretarias::all()->where('rol', 'Secretaria');
 
-            return view('modulos.Secretarias')->with('secretarias', $secretarias);
+            return view('modulos.Secretarias', compact( 'consultorios', 'secretarias'));
     }
 
     /**
@@ -89,9 +91,16 @@ class SecretariasController extends Controller
      * @param  \App\Models\Secretarias  $secretarias
      * @return \Illuminate\Http\Response
      */
-    public function edit(Secretarias $secretarias)
+    public function edit(Secretarias $id)
     {
-        //
+        if(auth()->user()->rol != "Administrador" && auth()->user()->rol != "Secretaria"){
+
+            return redirect('Inicio');
+            }
+
+        $secretaria= Secretarias::find($id->id);
+        
+        return view('modulos.secretaria.Editar-Secretaria',  compact( 'secretaria')); 
     }
 
     /**

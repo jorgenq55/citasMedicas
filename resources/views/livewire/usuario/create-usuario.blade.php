@@ -33,7 +33,7 @@
         </div>
 
         <br>
-{{--         <div class="row">
+        <div class="row">
             <div class="col-md-3">
                 <label for="consultorio">Consultorio</label>
             </div>
@@ -48,8 +48,26 @@
                     <span class="error">{{ $message }}</span>
                 @enderror
             </div>
-        </div> --}}
-      
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="rol">Rol</label>
+            </div>
+            <div class="col-md-9">
+                <select class="form-control" name="rol" wire:model="rol">
+                    <option value="">Seleccionar Rol...</option>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Doctor">Doctor</option>
+                    <option value="Secretaria">Secretaria</option>
+                    <option value="Paciente">Paciente</option>
+                </select>
+                @error('rol')
+                    <span class="error">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <br>
         <div class="row">
             <div class="col-md-3">
                 <label for="telefono">Teléfono</label>
@@ -97,7 +115,7 @@
         </div>
         <br>
 
-        <button type="submit" class="btn btn-primary">Agregar Paciente</button>
+        <button type="submit" class="btn btn-primary">Agregar Usuario</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 
     </form>

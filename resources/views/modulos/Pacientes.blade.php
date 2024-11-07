@@ -17,6 +17,7 @@
                         </div>
                     @endif
                     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#CrearPaciente">
+                        <i class="fa fa-external-link-square" aria-hidden="true"></i> 
                         Nuevo Paciente
                     </button>
 
@@ -52,10 +53,10 @@
                                         <td>No disponible</td>
                                     @endif
                                     <td>
-
                                         <a href= "Editar-Paciente/{{ $paciente->id }}">
                                             <button class="btn btn-success"><i class="fa fa-pencil"></i></button>
                                         </a>
+
                                         <button class="btn btn-danger EliminarPaciente" Pid="{{ $paciente->id }}"
                                             Paciente="{{ $paciente->name }}"><i class="fa fa-trash"></i></button>
 
@@ -78,7 +79,7 @@
             <div class="modal-content">
 
                 <div class="modal-body">
-                    <livewire:paciente.create-paciente  :consultorios="$consultorios"/>
+                    <livewire:paciente.create-paciente :consultorios="$consultorios" />
                 </div>
 
             </div>

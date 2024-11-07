@@ -5,7 +5,7 @@
 
         <section class="content-header">
 
-            <h1>Gestor de Doctores</h1>
+            <h1>Administración de Usuarios</h1>
 
         </section>
 
@@ -17,9 +17,9 @@
                         </div>
                     @endif
 
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#CrearDoctor">
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#CrearUsuario">
                         <i class="fa fa-external-link-square " aria-hidden="true"></i> 
-                        Nuevo Doctor
+                        Nuevo Usuario
                     </button>
 
                 </div>
@@ -31,46 +31,44 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre y Apellido</th>
-                                <th>Consultorio</th>
                                 <th>Email</th>
                                 <th>Documento</th>
-                                <th>Teléfono</th>
+                                <th>Rol</th>
                                 <th>Opciones</th>
                             </tr>
 
                         </thead>
                         <tbody>
 
-                            @foreach ($doctores as $doctor)
-                                @if ($doctor->rol == 'Doctor')
+                            @foreach ($users as $user)
                                     <tr>
-                                        <td>{{ $doctor->id }}</td>
-                                        <td>{{ $doctor->name }}</td>
-                                        <td>{{ $doctor->consultorios->consultorio }}</td>
-                                        <td>{{ $doctor->email }}</td>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        
+                                        <td>{{ $user->email }}</td>
 
-                                        @if ($doctor->documento != ' ')
-                                            <td>{{ $doctor->documento }}</td>
+                                        @if ($user->documento != ' ')
+                                            <td>{{ $user->documento }}</td>
                                         @else
                                             <td>No se dispone de documento</td>
                                         @endif
 
-                                        @if ($doctor->telefono != ' ')
-                                            <td>{{ $doctor->telefono }}</td>
+                                        @if ($user->rol != ' ')
+                                            <td>{{ $user->rol }}</td>
                                         @else
                                             <td>No se dispone de Telefono</td>
                                         @endif
 
                                         <td>
-                                            <a href= "Editar-Doctor/{{ $doctor->id }}">
+                                            <a href= "Editar-Usuario/{{ $user->id }}">
                                                 <button class="btn btn-success"><i class="fa fa-pencil"></i></button>
                                             </a>
 
-                                            <button class="btn btn-danger EliminarDoctor" Did={{ $doctor->id }}><i
+                                            <button class="btn btn-danger EliminarDoctor" Did={{ $user->id }}><i
                                                     class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
-                                @endif
+
                             @endforeach
 
 
@@ -84,12 +82,12 @@
 
     </div>
 
-    <div id="CrearDoctor" class="modal fade">
+    <div id="CrearUsuario" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
 
                 <div class="modal-body">
-                    <livewire:doctor.create-doctor  :consultorios="$consultorios" />
+                    <livewire:usuario.create-usuario :consultorios="$consultorios" />
                 </div>
 
             </div>

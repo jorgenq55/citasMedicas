@@ -84,9 +84,19 @@ class DoctoresController extends Controller
      * @param  \App\Models\Doctores  $doctores
      * @return \Illuminate\Http\Response
      */
-    public function edit(Doctores $doctores)
+    public function edit(Doctores $id)
     {
-        //
+        if(auth()->user()->rol != "Administrador" && auth()->user()->rol != "Secretaria"){
+
+            return redirect('Inicio');
+    
+            }
+            //$valor=$id->id;
+            //dd($id);
+        $doctor= Doctores::find($id->id);
+        $consultorios = Consultorios::all();
+        
+        return view('modulos.doctor.Editar-Doctor',  compact( 'consultorios', 'doctor')); 
     }
 
     /**

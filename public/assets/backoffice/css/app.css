@@ -1,3 +1,15 @@
 .error {
     color: red;
   }
+
+  h1.titulo {
+    color: MidnightBlue;
+  }
+
+.pestaña {
+    color: aliceblue;
+    margin: auto;
+    width: 100%;
+    padding: 14px;
+}
+

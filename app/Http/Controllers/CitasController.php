@@ -32,6 +32,7 @@ class CitasController extends Controller
         return view('modulos.Citas',compact( 'horarios', 'pacientes','citas', 'doctor'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      *

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Consultorios;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\Perfil\DatosRequest;
+
 
 class PacientesController extends Controller
 {
@@ -122,62 +124,21 @@ class PacientesController extends Controller
      * @param  \App\Models\Pacientes  $pacientes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pacientes $paciente)
+    public function update(DatosRequest $request, Pacientes $paciente)
     {
-        //dd($paciente["id"]);
-        if($paciente["email"] != request('email') && request('passwordN') != ""){
+        try 
+        {
+        DB::beginTransaction();
+        DB::table('users')->where('id',request('id'))
+        ->update(['name' => request('name'), 'email' => request('email'), 'documento' => request('documento')]);
 
-            $datos = request()->validate([
-                'name' =>['required'],
-                'documento' =>['required'],
-                'passwordN' =>['required','string','min:3'],
-                'email' =>['required','string', 'email', 'unique:users']
-            ]);
-
-            DB::table('users')->where('id',$paciente['id'])
-            ->update(['name' => $datos['name']], ['email' => $datos['email']],
-            ['documento' => $datos['documento']], ['password' => Hash::make($datos["passwordN"])]);
-        }
-
-
-        else if($paciente["email"] != request('email') && request('passwordN') == ""){
-            $datos = request()->validate([
-                'name' =>['required'],
-                'documento' =>['required'],
-                'password' =>['required','string','min:3'],
-                'email' =>['required','string', 'email', 'unique:users']
-            ]);
-            
-            DB::table('users')->where('id',$paciente['id'])
-            ->update(['name' => $datos['name'], 'email' => $datos['email'],
-            'documento' => $datos['documento'], 'password' => Hash::make($datos["password"])]);
-        }
-        else if($paciente["email"] == request('email') && request('passwordN') != ""){
-            $datos = request()->validate([
-                'name' =>['required'],
-                'documento' =>['required'],
-                'passwordN' =>['required','string','min:3'],
-                'email' =>['required','string', 'email']
-            ]);
-
-            DB::table('users')->where('id',$paciente['id'])
-            ->update(['name' => $datos['name'], 'email' => $datos['email'],
-            'documento' => $datos['documento'], 'password' => Hash::make($datos["passwordN"])]);
-        }
-        else{
-            $datos = request()->validate([
-                'name' =>['required'],
-                'documento' =>['required'],
-                'password' =>['required','string','min:3'],
-                'email' =>['required','string', 'email'],
-                'telefono' =>['string']
-            ]);
-            //dd($datos);
-            DB::table('users')->where('id',$paciente['id'])->update(['name' => $datos['name'],
-            'documento' => $datos['documento'], 'password' => Hash::make($datos["password"]),'telefono' => $datos['telefono']]);
-        }
-        
-        return redirect('Pacientes')->with('actualizadoP','Si');
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollback();
+                dd($e);
+                return response()->json(['error'=>'Consulte al Administrador']);
+            }
+        return redirect('Pacientes')->with(['message' => 'Paciente actualizado exitosamente.']);;
     }
 
     /**

@@ -7,11 +7,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Inicio;
+use App\Http\Requests\Perfil\DatosRequest;
+use App\Http\Requests\Perfil\PassRequest;
+
 
 class InicioController extends Controller
 {
-
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -39,65 +40,22 @@ class InicioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function DatosUpdate(Request $request)
-    {
-        dd("sas");
-        if(auth()->user()->email != request('email'))
-        {
-            if(isset($request["passwordN"])){
-                $datos = request()->validate([
-                    'name' =>['required', 'string', 'max:255'],
-                    'telefono' => [ 'string', 'max:255'],
-                    'documento' => [ 'string', 'max:255'],
-                    'email' => [ 'required', 'email', 'string', 'unique:users'],
-                    'passwordN' => [ 'string', 'min:3', 'required'],
-                ]);
-            }else{
-                $datos = request()->validate([
-                    'name' =>['required', 'string', 'max:255'],
-                    'telefono' => [ 'string', 'max:255'],
-                    'documento' => [ 'string', 'max:255'],
-                    'email' => [ 'required', 'email', 'string', 'unique:users'],
-                    
-                ]);
-            }
-        }else{
-            if(isset($request["passwordN"])){
-                $datos = request()->validate([
-                    'name' =>['required', 'string', 'max:255'],
-                    'telefono' => [ 'string', 'max:255'],
-                    'documento' => [ 'string', 'max:255'],
-                    'email' => [ 'required', 'email', 'string'],
-                    'passwordN' => [ 'string', 'min:3', 'required'],
-                ]);
-            }else{
-                $datos = request()->validate([
-                    'name' =>['required', 'string', 'max:255'],
-                    'telefono' => [ 'string', 'max:255'],
-                    'documento' => [ 'string', 'max:255'],
-                    'email' => [ 'required', 'email', 'string'],
-                    
-                ]);
-            }
-
-        }
-        
-        if(isset($request["passwordN"]))
-        {
-            
-            DB::table('users')->where('id', auth()->user()->id)
-            ->update(['name'=>$datos['name'], 'email'=>$datos["email"],
-            'telefono'=>$datos["telefono"], 'documento'=>$datos["documento"], 'password'=>Hash::make($datos["passwordN"])]);
-        }else{
-         
-            DB::table('users')->where('id', auth()->user()->id)
-            ->update(['name'=>$datos['name'], 'email'=>$datos["email"],
-            'telefono'=>$datos["telefono"], 'documento'=>$datos["documento"]]);
-        }
-
-        return redirect('Mis-Datos');
+    public function DatosUpdate(DatosRequest $request)
+    {        
+            DB::table('users')
+                ->where('id', auth()->user()->id)
+                ->update(['name' => request('name'),  'telefono' => request('telefono'), 'documento' => request('documento')]);
+            return redirect('Mis-Datos')->with(['message' => 'Perfil actualizado exitosamente.']);;
     }
 
+    public function DatosContraseñaUpdate(PassRequest $request)
+    {        
+            DB::table('users')
+                ->where('id', auth()->user()->id)
+                ->update(['password'=>Hash::make(request('password'))]);
+
+            return redirect('Mis-Datos')->with(['message' => 'Contraseña actualizado exitosamente.']);;
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -123,15 +81,15 @@ class InicioController extends Controller
     {
         $datos = request();
         $inicio = Inicio::find(1);
-        $inicio->dias = $datos["dias"];
-        $inicio->horaInicio = $datos["horaInicio"];
-        $inicio->horaFin = $datos["horaFin"];
-        $inicio->direccion = $datos["direccion"];
-        $inicio->telefono = $datos["telefono"];
-        $inicio->email = $datos["email"];
+        $inicio->dias = $datos['dias'];
+        $inicio->horaInicio = $datos['horaInicio'];
+        $inicio->horaFin = $datos['horaFin'];
+        $inicio->direccion = $datos['direccion'];
+        $inicio->telefono = $datos['telefono'];
+        $inicio->email = $datos['email'];
 
-        if(request('logoN')){
-            Storage::delete('public/'. $inicio->logo);
+        if (request('logoN')) {
+            Storage::delete('public/' . $inicio->logo);
             $rutaImg = $request['logoN']->store('inicio', 'public');
             $inicio->logo = $rutaImg;
         }

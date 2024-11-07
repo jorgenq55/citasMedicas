@@ -9,15 +9,14 @@ class CreateConsultorio extends Component
 {
     public $consultorio = '';
     public $message ='';
+    public $consultorios ='';
 
     public function save()
     {
-        
         Consultorios::create(['consultorio' => $this->consultorio]);
         $this->message = $this->consultorio;
-        
-       /*  return redirect()->to('/Consultorios')
-             ->with('status', 'Post created!'); */
+
+        return redirect()->to('/Consultorios');
     }
 
     public function render()

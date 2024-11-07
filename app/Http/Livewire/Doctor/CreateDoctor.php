@@ -18,13 +18,13 @@ class CreateDoctor extends Component
     public $consultorios;
 
     protected $rules = [
-        'name' => 'required',
+        'name' => 'required|min:3|max:50',
         'sexo' => 'required',
         'consultorio' => 'required',
-        'telefono' => 'required',
-        'email' => 'required|email',
-        'password' => 'required|min:3',
-        'documento' => 'required',
+        'telefono' => 'required|min:3|max:13',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|min:3|max:13',
+        'documento' => 'required|size:10',
     ];
 
     public function save()

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Paciente;
+namespace App\Http\Livewire\Usuario;
 
 use Livewire\Component;
-use App\Models\Pacientes;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class CreatePaciente extends Component
+class CreateUsuario extends Component
 {
     public $name = '';
     public $sexo = '';
@@ -14,10 +14,9 @@ class CreatePaciente extends Component
     public $documento = '';
     public $telefono = '';
     public $email = '';
+    public $rol = '';
     public $password = '';
-    public $pacientes;
     public $consultorios;
-    public $paciente = '';
 
     protected $rules = [
         'name' => 'required|min:3|max:50',
@@ -26,30 +25,31 @@ class CreatePaciente extends Component
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:3|max:13',
         'documento' => 'required|size:10',
-    ]; 
+    ];
 
     public function save()
     {
 
         $this->validate();
 
-        Pacientes::create([
+        User::create([
             'name' => $this->name,
             'email' => $this->email,
             'documento' => $this->documento,
             'telefono' => $this->telefono,
             'password' => Hash::make($this->password),
-            'rol' => 'Paciente',
-            'id_consultorio' => '0',
+            'rol' => $this->rol,
+            'id_consultorio' => $this->consultorio,
             'sexo' => $this->sexo  
         ]);
 
-        session()->flash('message', 'Se Creó el doctor: '.$this->name);
-        return redirect()->to('/Pacientes');
+
+        session()->flash('message', 'Se Creó el usuario: '.$this->name);
+        return redirect()->to('/Usuarios');
     }
 
     public function render()
     {
-        return view('livewire.paciente.create-paciente');
+        return view('livewire.usuario.create-usuario');
     }
 }

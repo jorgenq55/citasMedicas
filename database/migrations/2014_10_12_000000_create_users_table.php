@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('documento');
             $table->string('telefono');
             $table->string('sexo');
-            $table->string('id_consultorio');
+            $table->string('id_consultorio')->nullable();
             $table->string('rol');
             $table->rememberToken();
             $table->timestamps();

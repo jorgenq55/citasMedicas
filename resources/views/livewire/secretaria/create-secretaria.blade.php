@@ -33,23 +33,6 @@
         </div>
 
         <br>
-{{--         <div class="row">
-            <div class="col-md-3">
-                <label for="consultorio">Consultorio</label>
-            </div>
-            <div class="col-md-9">
-                <select class="form-control" name="consultorio" wire:model="consultorio">
-                    <option value="">Seleccionar Consultorio...</option>
-                    @foreach ($consultorios as $consultorio)
-                        <option value="{{ $consultorio->id }}">{{ $consultorio->consultorio }}</option>
-                    @endforeach
-                </select>
-                @error('consultorio')
-                    <span class="error">{{ $message }}</span>
-                @enderror
-            </div>
-        </div> --}}
-      
         <div class="row">
             <div class="col-md-3">
                 <label for="telefono">Teléfono</label>
@@ -97,7 +80,7 @@
         </div>
         <br>
 
-        <button type="submit" class="btn btn-primary">Agregar Paciente</button>
+        <button type="submit" class="btn btn-primary">Agregar Secretari@</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 
     </form>

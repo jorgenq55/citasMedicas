@@ -15,8 +15,13 @@
         </a>
 
         <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav ">
+                <li class="pestaña">
+                     {{ __(auth()->user()->rol) }}
+                </li>
+            </ul>
             <ul class="nav navbar-nav pull-right">
-
+                
                 <li class="dropdown user user-menu  ">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         {{ auth()->user()->name}}
@@ -44,6 +49,7 @@
                         </li>
                     </ul>
                 </li>
+               
             </ul>
         </div>
     </nav>

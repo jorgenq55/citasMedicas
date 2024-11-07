@@ -27,7 +27,7 @@
 
         <li>
             <a href="{{ url('Pacientes')}}">
-                <i class="fa fa-users"></i>
+                <i class="fa fa-blind"></i>
                 <span>Pacientes</span>
             </a>
         </li>
@@ -36,6 +36,12 @@
             <a href="{{ url('Secretarias')}}">
                 <i class="fa fa-female"></i>
                 <span>Secretarias</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('Usuarios')}}">
+                <i class="fa fa-users"></i>
+                <span>Usuarios</span>
             </a>
         </li>
     </section>

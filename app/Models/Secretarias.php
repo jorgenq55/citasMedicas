@@ -12,7 +12,7 @@ class Secretarias extends Model
     protected $table = 'users';
 
     protected $fillable = [
-        'name', 'email', 'id_consultorio', 'sexo', 'password', 'rol', 'documento', 'telefono'
+        'name', 'email', 'sexo', 'password', 'rol', 'documento', 'telefono'
     ];
 
     public $timestamps = false;
