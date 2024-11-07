@@ -46,7 +46,12 @@
                                     <tr>
                                         <td>{{ $doctor->id }}</td>
                                         <td>{{ $doctor->name }}</td>
-                                        <td>{{ $doctor->consultorios->consultorio }}</td>
+                                        @isset ($doctor->consultorios)
+                                            <td>{{ $doctor->consultorios->consultorio }}</td>
+                                        @else
+                                            <td>Sin Consultorio</td>
+                                        @endisset
+                                        
                                         <td>{{ $doctor->email }}</td>
 
                                         @if ($doctor->documento != ' ')

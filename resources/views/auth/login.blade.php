@@ -29,31 +29,29 @@
             @enderror
         </div>
 
-        <div class="row mb-3">
-            <div class="col-md-6 offset-md-4">
+        <div class="forget">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="remember" id="remember"
                         {{ old('remember') ? 'checked' : '' }}>
 
-                    <label class="form-check-label" for="remember">
+                    <label for="remember">
                         {{ __('Recordarme') }}
                     </label>
                 </div>
-            </div>
+            
         </div>
 
-        <div class="row mb-0">
-            <div class="col-md-8 offset-md-4">
+        <div class="register">
                 <button type="submit" class="btn btn-primary">
                     {{ __('Login') }}
                 </button>
-
+        </div>
+        <br>
                 @if (Route::has('password.request'))
                     <a class="btn btn-link" href="{{ route('password.request') }}">
                         {{ __('Olvidó su contraseña?') }}
                     </a>
                 @endif
-            </div>
-        </div>
+        
     </form>
 </div>
