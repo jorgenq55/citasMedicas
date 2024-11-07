@@ -36,6 +36,7 @@ Auth::routes();
 
 
 //-------Rutas para manejar el inicio-------------------
+Route::get('/home', [InicioController::class, 'index']);
 Route::get('/', [InicioController::class, 'index']);
 Route::get('Inicio-Editar', [InicioController::class, 'edit']);
 Route::put('Inicio-Editar', [InicioController::class, 'update']);
